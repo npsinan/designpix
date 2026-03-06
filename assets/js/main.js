@@ -3,24 +3,54 @@
     const toggle = document.querySelector('[data-nav-toggle]');
 
     if (nav && toggle) {
+        const serviceMenus = nav.querySelectorAll('.nav-services');
+
+        const closeServiceMenus = () => {
+            serviceMenus.forEach((menu) => {
+                menu.classList.remove('is-open');
+                const trigger = menu.querySelector('.nav-services__trigger');
+                trigger?.setAttribute('aria-expanded', 'false');
+            });
+        };
+
         toggle.addEventListener('click', () => {
             const expanded = toggle.getAttribute('aria-expanded') === 'true';
             toggle.setAttribute('aria-expanded', String(!expanded));
             nav.classList.toggle('is-open', !expanded);
             toggle.innerHTML = !expanded ? '<i class="ri-close-line"></i>' : '<i class="ri-menu-line"></i>';
+            if (expanded) {
+                closeServiceMenus();
+            }
         });
 
         nav.querySelectorAll('a').forEach((link) => {
             link.addEventListener('click', () => {
                 nav.classList.remove('is-open');
+                closeServiceMenus();
                 toggle.setAttribute('aria-expanded', 'false');
                 toggle.innerHTML = '<i class="ri-menu-line"></i>';
+            });
+        });
+
+        serviceMenus.forEach((menu) => {
+            const trigger = menu.querySelector('.nav-services__trigger');
+            trigger?.addEventListener('click', (event) => {
+                if (!window.matchMedia('(max-width: 920px)').matches) {
+                    return;
+                }
+
+                event.preventDefault();
+                const expanded = trigger.getAttribute('aria-expanded') === 'true';
+                closeServiceMenus();
+                menu.classList.toggle('is-open', !expanded);
+                trigger.setAttribute('aria-expanded', String(!expanded));
             });
         });
 
         window.addEventListener('resize', () => {
             if (window.innerWidth > 920 && nav.classList.contains('is-open')) {
                 nav.classList.remove('is-open');
+                closeServiceMenus();
                 toggle.setAttribute('aria-expanded', 'false');
                 toggle.innerHTML = '<i class="ri-menu-line"></i>';
             }
@@ -28,9 +58,18 @@
     }
 
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('.primary-nav a').forEach((link) => {
+    document.querySelectorAll('.primary-nav > a, .nav-services__panel a').forEach((link) => {
         if (link.getAttribute('href') === currentPage) {
             link.classList.add('is-active');
+        }
+    });
+
+    document.querySelectorAll('.nav-services').forEach((menu) => {
+        const trigger = menu.querySelector('.nav-services__trigger');
+        const hasActiveChild = menu.querySelector('.nav-services__panel a.is-active');
+        if (hasActiveChild) {
+            trigger?.classList.add('is-active');
+            menu.classList.add('has-active');
         }
     });
 
@@ -105,6 +144,70 @@
 
         overlay?.addEventListener('click', () => {
             closeMobileFaq();
+        });
+    });
+
+    const contactFab = document.querySelector('[data-contact-fab]');
+    if (contactFab) {
+        const fabToggle = contactFab.querySelector('[data-contact-toggle]');
+
+        const closeFab = () => {
+            contactFab.classList.remove('is-open');
+            fabToggle?.setAttribute('aria-expanded', 'false');
+        };
+
+        fabToggle?.addEventListener('click', () => {
+            const expanded = fabToggle.getAttribute('aria-expanded') === 'true';
+            contactFab.classList.toggle('is-open', !expanded);
+            fabToggle.setAttribute('aria-expanded', String(!expanded));
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!contactFab.contains(event.target)) {
+                closeFab();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeFab();
+            }
+        });
+    }
+
+    document.querySelectorAll('[data-whatsapp-form]').forEach((form) => {
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const whatsappNumber = (form.dataset.whatsappNumber || '971585824210').replace(/\D/g, '');
+            const formData = new FormData(form);
+
+            const name = (formData.get('name') || '').toString().trim();
+            const phone = (formData.get('phone') || '').toString().trim();
+            const email = (formData.get('email') || '').toString().trim();
+            const service = (formData.get('service') || '').toString().trim();
+            const message = (formData.get('message') || '').toString().trim();
+
+            const text = [
+                'New Website Inquiry',
+                `Name: ${name || '-'}`,
+                `Phone: ${phone || '-'}`,
+                `Email: ${email || '-'}`,
+                `Service: ${service || '-'}`,
+                `Message: ${message || '-'}`
+            ].join('\n');
+
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+            const opened = window.open(whatsappUrl, '_blank', 'noopener');
+
+            if (!opened) {
+                window.location.href = whatsappUrl;
+            }
         });
     });
 

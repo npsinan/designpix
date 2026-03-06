@@ -17,7 +17,7 @@
     <header class="site-header">
         <div class="container header-inner">
             <a class="logo" href="index.html" aria-label="Design Pix Home">
-                <img src="assets/images/logo.png" alt="Design Pix Advertising" class="logo-image">
+                <img src="assets/images/logo-01.svg" alt="Design Pix Advertising" class="logo-image">
             </a>
             <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false"
                 data-nav-toggle>
@@ -25,10 +25,17 @@
             </button>
             <nav class="primary-nav" id="primary-nav" data-primary-nav>
                 <a href="index.html">Home</a>
-                <a href="uv-printing-services.html">UV Printing Services</a>
-                <a href="large-format-printing-services.html">Large Format Printing Services</a>
-                <a href="signages.html">Signages</a>
-                <a href="promotional-products.html">Promotional Products</a>
+                <div class="nav-services">
+                    <button class="nav-services__trigger" type="button" aria-expanded="false">
+                        Services <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                    <div class="nav-services__panel">
+                        <a href="uv-printing-services.html">UV Printing Services</a>
+                        <a href="large-format-printing-services.html">Large Format Printing Services</a>
+                        <a href="signages.html">Signages</a>
+                        <a href="promotional-products.html">Promotional Products</a>
+                    </div>
+                </div>
                 <a href="contact-us.html">Contact Us</a>
             </nav>
         </div>
@@ -204,8 +211,8 @@
 
         <section class="section" style="padding-top: 0;">
             <div class="container faq-wrap">
-                <h2 class="section-title" data-animate>FAQ For <span class="accent">Printing Services in UAE</span></h2>
-                <p class="section-desc" data-animate>SEO-focused answers organized by category for easier browsing.</p>
+                <h2 class="section-title" data-animate>FAQ</h2>
+
 
                 <section class="cd-faq js-cd-faq max-width-md margin-top-lg margin-bottom-lg" data-animate>
                     <ul class="cd-faq__categories">
@@ -279,6 +286,20 @@
             </div>
         </section>
     </main>
+
+    <div class="fixed-contact" data-contact-fab>
+        <div class="fixed-contact__menu">
+            <a href="https://wa.me/971585824210?text=Hello%20Design%20Pix%2C%20I%20need%20printing%20support."
+                target="_blank" rel="noopener noreferrer">WhatsApp Chat</a>
+            <a href="contact-us.html">Open Contact Form</a>
+            <a href="tel:+971585824210">Call Now</a>
+        </div>
+        <button class="fixed-contact__toggle" type="button" data-contact-toggle aria-expanded="false"
+            aria-label="Open contact options">
+            <i class="ri-customer-service-2-fill"></i>
+            <span>Contact Options</span>
+        </button>
+    </div>
 
     <footer class="site-footer">
         <div class="container footer-contact-wrap">

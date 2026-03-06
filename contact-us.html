@@ -14,17 +14,24 @@
     <header class="site-header">
         <div class="container header-inner">
             <a class="logo" href="index.html" aria-label="Design Pix Home">
-                <img src="assets/images/logo.png" alt="Design Pix Advertising" class="logo-image">
+                <img src="assets/images/logo-01.svg" alt="Design Pix Advertising" class="logo-image">
             </a>
             <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false" data-nav-toggle>
                 <i class="ri-menu-line"></i>
             </button>
             <nav class="primary-nav" id="primary-nav" data-primary-nav>
                 <a href="index.html">Home</a>
-                <a href="uv-printing-services.html">UV Printing Services</a>
-                <a href="large-format-printing-services.html">Large Format Printing Services</a>
-                <a href="signages.html">Signages</a>
-                <a href="promotional-products.html">Promotional Products</a>
+                <div class="nav-services">
+                    <button class="nav-services__trigger" type="button" aria-expanded="false">
+                        Services <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                    <div class="nav-services__panel">
+                        <a href="uv-printing-services.html">UV Printing Services</a>
+                        <a href="large-format-printing-services.html">Large Format Printing Services</a>
+                        <a href="signages.html">Signages</a>
+                        <a href="promotional-products.html">Promotional Products</a>
+                    </div>
+                </div>
                 <a href="contact-us.html">Contact Us</a>
             </nav>
         </div>
@@ -75,15 +82,22 @@
                             <img src="assets/images/qr-code.png" alt="Design Pix QR code">
                             <p>Scan for quick contact destination.</p>
                         </div>
-                        <div class="map-placeholder">
-                            <div>
-                                <i class="ri-map-pin-2-fill" style="font-size: 1.7rem; color: #e31e24;"></i>
-                                <p style="margin-top: 0.45rem;">Address/Map placeholder section.<br>Add final branch location details here.</p>
-                            </div>
+                        <div class="map-placeholder map-live">
+                            <iframe
+                                title="Design Pix Location Map"
+                                src="https://maps.google.com/maps?q=25.278583,55.678306&z=16&output=embed"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                allowfullscreen>
+                            </iframe>
                         </div>
+                        <p style="margin-top: 0.55rem; color: var(--brand-gray-700); font-size: 0.9rem;">
+                            Location: 25°16'42.9&quot;N 55°40'41.9&quot;E
+                            <a href="https://maps.google.com/?q=25.278583,55.678306" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
+                        </p>
                     </article>
 
-                    <form class="form-panel" data-animate action="#" method="post">
+                    <form class="form-panel" data-animate action="#" method="post" data-whatsapp-form data-whatsapp-number="971585824210">
                         <h3 style="font-size: 1.2rem;">Send Your Requirement</h3>
                         <div class="form-grid">
                             <div>
@@ -107,7 +121,8 @@
                             <label for="message">Message</label>
                             <textarea id="message" name="message" placeholder="Share your project scope"></textarea>
                         </div>
-                        <button class="btn btn-primary" type="submit">Submit Inquiry</button>
+                        <p data-form-note>Submitting this form opens WhatsApp with your filled details.</p>
+                        <button class="btn btn-primary" type="submit">Send on WhatsApp</button>
                     </form>
                 </div>
             </div>
@@ -226,3 +241,5 @@
     <script src="assets/js/main.js"></script>
 </body>
 </html>
+
+
