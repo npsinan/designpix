@@ -682,7 +682,7 @@ img {
 }
 
 .contact-grid .contact-card {
-    grid-column: span 3;
+    grid-column: span 4;
 }
 
 .contact-wrap {
@@ -978,24 +978,44 @@ textarea:focus {
 }
 
 @media (max-width: 920px) {
+    .header-inner {
+        min-height: 74px;
+        gap: 0.8rem;
+    }
+
+    .logo-image {
+        height: 34px;
+    }
+
     .nav-toggle {
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+        border: 1px solid #dfe4ec;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 8px 18px rgba(16, 24, 40, 0.08);
     }
 
     .primary-nav {
         position: absolute;
-        top: calc(100% + 1px);
+        top: calc(100% + 0.35rem);
         left: 0;
         right: 0;
         display: none;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
         gap: 0;
-        border-bottom: 1px solid #e7ebf2;
+        border: 1px solid #e7ebf2;
+        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
         background: #fff;
         box-shadow: 0 16px 28px rgba(0, 0, 0, 0.09);
+        max-height: calc(100vh - 96px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
     }
 
     .primary-nav.is-open {
@@ -1008,6 +1028,7 @@ textarea:focus {
         padding: 0.86rem 1.2rem;
         border-top: 1px solid #edf1f6;
         justify-content: space-between;
+        text-align: left;
     }
 
     .primary-nav>a::after,
@@ -1053,10 +1074,14 @@ textarea:focus {
         border-radius: 10px;
         padding: 0.55rem 0.68rem;
         background: #f8fafd;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        line-height: 1.35;
+        text-align: left;
     }
 
     .nav-services.is-open .nav-services__panel {
-        max-height: 260px;
+        max-height: min(420px, 60vh);
         padding: 0 1.2rem 0.7rem;
     }
 
