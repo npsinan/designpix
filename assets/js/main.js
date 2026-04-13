@@ -1,4 +1,5 @@
 (() => {
+    const gsap = window.gsap || null;
     const nav = document.querySelector('[data-primary-nav]');
     const toggle = document.querySelector('[data-nav-toggle]');
 
@@ -77,6 +78,93 @@
         node.textContent = new Date().getFullYear();
     });
 
+    const getScrollOffset = () => {
+        const header = document.querySelector('.site-header');
+        return (header?.getBoundingClientRect().height || 0) + 18;
+    };
+
+    const smoothScrollToNode = (target, {
+        duration = 0.85,
+        delay = 0.08,
+        updateHash = false,
+        hashValue = ''
+    } = {}) => {
+        if (!target) {
+            return;
+        }
+
+        const targetY = Math.max(
+            target.getBoundingClientRect().top + window.scrollY - getScrollOffset(),
+            0
+        );
+
+        if (!gsap) {
+            window.scrollTo({ top: targetY, behavior: 'smooth' });
+            if (updateHash && hashValue) {
+                window.setTimeout(() => {
+                    window.history.replaceState(null, '', hashValue);
+                }, 220);
+            }
+            return;
+        }
+
+        const scrollState = { y: window.scrollY };
+        gsap.killTweensOf(scrollState);
+        gsap.to(scrollState, {
+            y: targetY,
+            duration,
+            delay,
+            ease: 'power2.out',
+            overwrite: true,
+            onUpdate: () => {
+                window.scrollTo(0, scrollState.y);
+            },
+            onComplete: () => {
+                if (updateHash && hashValue) {
+                    window.history.replaceState(null, '', hashValue);
+                }
+            }
+        });
+    };
+
+    document.querySelectorAll('a[href^="#"]:not([href="#0"])').forEach((link) => {
+        if (link.classList.contains('cd-faq__category')) {
+            return;
+        }
+
+        link.addEventListener('click', (event) => {
+            const hashValue = link.getAttribute('href');
+            if (!hashValue || hashValue === '#') {
+                return;
+            }
+
+            const target = document.querySelector(hashValue);
+            if (!target) {
+                return;
+            }
+
+            event.preventDefault();
+            smoothScrollToNode(target, {
+                duration: 0.95,
+                delay: 0.06,
+                updateHash: true,
+                hashValue
+            });
+        });
+    });
+
+    if (window.location.hash && window.location.hash !== '#0') {
+        const initialTarget = document.querySelector(window.location.hash);
+        if (initialTarget) {
+            window.requestAnimationFrame(() => {
+                smoothScrollToNode(initialTarget, {
+                    duration: 0.95,
+                    delay: 0.18
+                });
+            });
+        }
+    }
+
     const faqBlocks = document.querySelectorAll('.js-cd-faq');
     faqBlocks.forEach((faq) => {
         const itemsPanel = faq.querySelector('.cd-faq__items');
@@ -108,7 +196,12 @@
                 categories.forEach((cat) => cat.classList.remove('cd-faq__category-selected'));
                 link.classList.add('cd-faq__category-selected');
 
-                targetGroup.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                smoothScrollToNode(targetGroup, {
+                    duration: 0.82,
+                    delay: 0.1,
+                    updateHash: true,
+                    hashValue: targetSelector
+                });
             });
         });
 
@@ -206,9 +299,7 @@
         });
     });
 
-    if (window.gsap) {
-        const gsap = window.gsap;
-
+    if (gsap) {
         gsap.from('.site-header', {
             y: -26,
             opacity: 0,
@@ -228,16 +319,25 @@
             });
         }
 
-        const animatedNodes = document.querySelectorAll('[data-animate]');
+        const animatedNodes = Array.from(document.querySelectorAll('[data-animate]'));
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (!entry.isIntersecting) {
                     return;
                 }
 
+                const revealIndex = animatedNodes.indexOf(entry.target);
+                const revealDelay = revealIndex >= 0 ? (revealIndex % 3) * 0.08 : 0;
+
                 gsap.fromTo(entry.target,
                     { y: 28, opacity: 0 },
-                    { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out' }
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.7,
+                        delay: revealDelay,
+                        ease: 'power2.out'
+                    }
                 );
 
                 observer.unobserve(entry.target);
