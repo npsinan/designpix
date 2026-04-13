@@ -108,11 +108,6 @@
                 categories.forEach((cat) => cat.classList.remove('cd-faq__category-selected'));
                 link.classList.add('cd-faq__category-selected');
 
-                if (window.matchMedia('(max-width: 920px)').matches && itemsPanel) {
-                    itemsPanel.classList.add('cd-faq__items--slide-in');
-                    faq.classList.add('cd-faq--panel-open');
-                }
-
                 targetGroup.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
