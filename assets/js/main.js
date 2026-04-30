@@ -90,7 +90,7 @@
       carouselTrack.querySelectorAll("[data-carousel-item]"),
     );
     let slideshowTimer = null;
-    let userScrolled = false;
+    let resumeTimer = null;
 
     const getCurrentIndex = () => {
       const trackCenter =
@@ -110,6 +110,13 @@
       return nearestIndex;
     };
 
+    const updateActiveCard = () => {
+      const currentIndex = getCurrentIndex();
+      carouselItems.forEach((item, index) => {
+        item.classList.toggle("active", index === currentIndex);
+      });
+    };
+
     const scrollToIndex = (index) => {
       const item = carouselItems[index];
       if (!item) {
@@ -122,6 +129,7 @@
       );
 
       carouselTrack.scrollTo({ left: targetScroll, behavior: "smooth" });
+      window.setTimeout(updateActiveCard, 600);
     };
 
     const startSlideshow = () => {
@@ -131,7 +139,7 @@
       slideshowTimer = window.setInterval(() => {
         const nextIndex = (getCurrentIndex() + 1) % carouselItems.length;
         scrollToIndex(nextIndex);
-      }, 15000);
+      }, 5000);
     };
 
     const stopSlideshow = () => {
@@ -139,15 +147,14 @@
         window.clearInterval(slideshowTimer);
         slideshowTimer = null;
       }
+      if (resumeTimer) {
+        window.clearTimeout(resumeTimer);
+      }
     };
 
     const resetSlideshow = () => {
-      userScrolled = true;
       stopSlideshow();
-      window.setTimeout(() => {
-        userScrolled = false;
-        startSlideshow();
-      }, 15000);
+      resumeTimer = window.setTimeout(startSlideshow, 7000);
     };
 
     carouselTrack.addEventListener("wheel", (event) => {
@@ -161,6 +168,12 @@
       }
     });
 
+    carouselTrack.addEventListener("scroll", () => {
+      window.clearTimeout(resumeTimer);
+      resumeTimer = window.setTimeout(updateActiveCard, 150);
+    });
+
+    updateActiveCard();
     startSlideshow();
   }
 

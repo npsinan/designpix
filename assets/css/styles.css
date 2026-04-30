@@ -539,6 +539,14 @@ img {
     min-height: 360px;
     min-width: 320px;
     max-width: 420px;
+    opacity: 0.55;
+    transform: scale(0.98);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.carousel-card.active {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .carousel-card img {
