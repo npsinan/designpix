@@ -84,15 +84,21 @@
     node.textContent = new Date().getFullYear();
   });
 
-  const carouselTrack = document.querySelector(".carousel__track");
-  if (carouselTrack) {
+  const carouselContainers = document.querySelectorAll(".carousel");
+  carouselContainers.forEach((carousel) => {
+    const carouselTrack = carousel.querySelector(".carousel__track");
+    if (!carouselTrack) {
+      return;
+    }
+
     const carouselItems = Array.from(
       carouselTrack.querySelectorAll("[data-carousel-item]"),
     );
     let slideshowTimer = null;
     let resumeTimer = null;
+    let currentIndex = 0;
 
-    const getCurrentIndex = () => {
+    const updateActiveSlide = () => {
       const trackCenter =
         carouselTrack.scrollLeft + carouselTrack.clientWidth / 2;
       let nearestIndex = 0;
@@ -107,18 +113,15 @@
         }
       });
 
-      return nearestIndex;
-    };
-
-    const updateActiveCard = () => {
-      const currentIndex = getCurrentIndex();
-      carouselItems.forEach((item, index) => {
-        item.classList.toggle("active", index === currentIndex);
+      currentIndex = nearestIndex;
+      carouselItems.forEach((item, itemIndex) => {
+        item.classList.toggle("active", itemIndex === currentIndex);
       });
     };
 
     const scrollToIndex = (index) => {
-      const item = carouselItems[index];
+      currentIndex = (index + carouselItems.length) % carouselItems.length;
+      const item = carouselItems[currentIndex];
       if (!item) {
         return;
       }
@@ -129,7 +132,25 @@
       );
 
       carouselTrack.scrollTo({ left: targetScroll, behavior: "smooth" });
-      window.setTimeout(updateActiveCard, 600);
+      if (gsap) {
+        gsap.to(item, {
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          ease: "power3.out",
+        });
+      }
+      updateActiveSlide();
+    };
+
+    const getCanScrollHorizontal = (deltaY) => {
+      if (deltaY > 0) {
+        return (
+          carouselTrack.scrollLeft + carouselTrack.clientWidth <
+          carouselTrack.scrollWidth - 1
+        );
+      }
+      return carouselTrack.scrollLeft > 1;
     };
 
     const startSlideshow = () => {
@@ -137,8 +158,7 @@
         return;
       }
       slideshowTimer = window.setInterval(() => {
-        const nextIndex = (getCurrentIndex() + 1) % carouselItems.length;
-        scrollToIndex(nextIndex);
+        scrollToIndex(currentIndex + 1);
       }, 5000);
     };
 
@@ -149,6 +169,7 @@
       }
       if (resumeTimer) {
         window.clearTimeout(resumeTimer);
+        resumeTimer = null;
       }
     };
 
@@ -157,25 +178,41 @@
       resumeTimer = window.setTimeout(startSlideshow, 7000);
     };
 
-    carouselTrack.addEventListener("wheel", (event) => {
-      if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
-        event.preventDefault();
-        carouselTrack.scrollBy({
-          left: event.deltaY * 1.2,
-          behavior: "smooth",
-        });
-        resetSlideshow();
-      }
-    });
+    carouselTrack.addEventListener(
+      "wheel",
+      (event) => {
+        if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+          if (getCanScrollHorizontal(event.deltaY)) {
+            event.preventDefault();
+            carouselTrack.scrollBy({
+              left: event.deltaY * 2,
+              behavior: "smooth",
+            });
+            resetSlideshow();
+          }
+        }
+      },
+      { passive: false },
+    );
 
     carouselTrack.addEventListener("scroll", () => {
       window.clearTimeout(resumeTimer);
-      resumeTimer = window.setTimeout(updateActiveCard, 150);
+      resumeTimer = window.setTimeout(updateActiveSlide, 150);
     });
 
-    updateActiveCard();
+    if (gsap) {
+      gsap.from(carousel.querySelectorAll(".carousel-card"), {
+        opacity: 0,
+        y: 40,
+        stagger: 0.12,
+        duration: 0.85,
+        ease: "power3.out",
+      });
+    }
+
+    updateActiveSlide();
     startSlideshow();
-  }
+  });
 
   const getScrollOffset = () => {
     const header = document.querySelector(".site-header");
