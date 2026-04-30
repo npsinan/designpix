@@ -84,6 +84,86 @@
     node.textContent = new Date().getFullYear();
   });
 
+  const carouselTrack = document.querySelector(".carousel__track");
+  if (carouselTrack) {
+    const carouselItems = Array.from(
+      carouselTrack.querySelectorAll("[data-carousel-item]"),
+    );
+    let slideshowTimer = null;
+    let userScrolled = false;
+
+    const getCurrentIndex = () => {
+      const trackCenter =
+        carouselTrack.scrollLeft + carouselTrack.clientWidth / 2;
+      let nearestIndex = 0;
+      let nearestDistance = Infinity;
+
+      carouselItems.forEach((item, index) => {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const distance = Math.abs(trackCenter - itemCenter);
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nearestIndex = index;
+        }
+      });
+
+      return nearestIndex;
+    };
+
+    const scrollToIndex = (index) => {
+      const item = carouselItems[index];
+      if (!item) {
+        return;
+      }
+
+      const targetScroll = Math.max(
+        0,
+        item.offsetLeft - (carouselTrack.clientWidth - item.offsetWidth) / 2,
+      );
+
+      carouselTrack.scrollTo({ left: targetScroll, behavior: "smooth" });
+    };
+
+    const startSlideshow = () => {
+      if (slideshowTimer) {
+        return;
+      }
+      slideshowTimer = window.setInterval(() => {
+        const nextIndex = (getCurrentIndex() + 1) % carouselItems.length;
+        scrollToIndex(nextIndex);
+      }, 15000);
+    };
+
+    const stopSlideshow = () => {
+      if (slideshowTimer) {
+        window.clearInterval(slideshowTimer);
+        slideshowTimer = null;
+      }
+    };
+
+    const resetSlideshow = () => {
+      userScrolled = true;
+      stopSlideshow();
+      window.setTimeout(() => {
+        userScrolled = false;
+        startSlideshow();
+      }, 15000);
+    };
+
+    carouselTrack.addEventListener("wheel", (event) => {
+      if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+        event.preventDefault();
+        carouselTrack.scrollBy({
+          left: event.deltaY * 1.2,
+          behavior: "smooth",
+        });
+        resetSlideshow();
+      }
+    });
+
+    startSlideshow();
+  }
+
   const getScrollOffset = () => {
     const header = document.querySelector(".site-header");
     return (header?.getBoundingClientRect().height || 0) + 18;
