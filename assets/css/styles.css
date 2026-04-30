@@ -482,7 +482,7 @@ img {
 
 .showcase-grid .card img {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    height: 260px;
     border-radius: var(--radius-lg);
     margin-bottom: 1rem;
     object-fit: cover;
@@ -513,15 +513,12 @@ img {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 0.65rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .carousel__track::-webkit-scrollbar {
-    height: 8px;
-}
-
-.carousel__track::-webkit-scrollbar-thumb {
-    background: rgba(45, 49, 56, 0.18);
-    border-radius: 999px;
+    display: none;
 }
 
 .carousel__track>* {
@@ -656,6 +653,18 @@ img {
 
 .showcase-grid .card {
     grid-column: span 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+}
+
+.showcase-grid .card img {
+    width: 100%;
+    height: 260px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 1rem;
+    object-fit: cover;
 }
 
 .badge-cloud {
