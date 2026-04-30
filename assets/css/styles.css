@@ -502,30 +502,28 @@ img {
 .carousel__track-wrap {
     width: 100%;
     overflow: hidden;
+    position: relative;
 }
 
 .carousel__track {
-    display: flex;
-    align-items: stretch;
-    gap: 1rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 0.65rem;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    position: relative;
+    width: 100%;
+    min-height: 460px;
 }
 
 .carousel__track::-webkit-scrollbar {
-    width: 0;
-    height: 0;
+    display: none;
 }
 
 .carousel__track>* {
-    scroll-snap-align: center;
-    flex: 0 0 min(320px, 100%);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) scale(0.98);
+    width: min(420px, 100%);
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    pointer-events: none;
 }
 
 .carousel-card {
@@ -537,9 +535,8 @@ img {
     display: grid;
     grid-template-rows: auto 1fr;
     min-height: 360px;
-    min-width: 320px;
-    max-width: 420px;
-    opacity: 0.55;
+    width: 100%;
+    opacity: 0.7;
     transform: scale(0.98);
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
