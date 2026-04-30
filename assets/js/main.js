@@ -98,11 +98,11 @@
       if (!item) {
         return;
       }
-      item.scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "nearest",
-      });
+      const targetScroll = Math.max(
+        0,
+        item.offsetLeft - (track.clientWidth - item.offsetWidth) / 2,
+      );
+      track.scrollTo({ left: targetScroll, behavior: "smooth" });
     };
 
     const updateIndex = () => {
