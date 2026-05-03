@@ -37,6 +37,18 @@
 
     serviceMenus.forEach((menu) => {
       const trigger = menu.querySelector(".nav-services__trigger");
+
+      const openMenu = () => {
+        closeServiceMenus();
+        menu.classList.add("is-open");
+        trigger?.setAttribute("aria-expanded", "true");
+      };
+
+      const closeMenu = () => {
+        menu.classList.remove("is-open");
+        trigger?.setAttribute("aria-expanded", "false");
+      };
+
       trigger?.addEventListener("click", (event) => {
         if (!window.matchMedia("(max-width: 920px)").matches) {
           return;
@@ -44,9 +56,24 @@
 
         event.preventDefault();
         const expanded = trigger.getAttribute("aria-expanded") === "true";
-        closeServiceMenus();
-        menu.classList.toggle("is-open", !expanded);
-        trigger.setAttribute("aria-expanded", String(!expanded));
+        if (expanded) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      // Desktop hover behavior for service menu
+      menu.addEventListener("mouseenter", () => {
+        if (window.matchMedia("(min-width: 921px)").matches) {
+          openMenu();
+        }
+      });
+
+      menu.addEventListener("mouseleave", () => {
+        if (window.matchMedia("(min-width: 921px)").matches) {
+          closeMenu();
+        }
       });
     });
 
@@ -85,6 +112,11 @@
   });
 
   const initFeaturedSwiper = () => {
+    const featuredEl = document.querySelector("#featured-swiper");
+    if (!featuredEl) {
+      return;
+    }
+
     if (!window.Swiper) {
       // If Swiper script isn't loaded yet, retry after a short delay
       setTimeout(initFeaturedSwiper, 100);
