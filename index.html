@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
 </head>
 
 <body>
@@ -83,12 +84,13 @@
         <div class="container">
             <div class="section-head">
                 <h2 class="section-title">Featured <span class="accent">Print Projects</span></h2>
-                <p class="section-desc">Scroll through a longer, seamless portfolio of UAE print installations and branding solutions.</p>
+                <p class="section-desc">Scroll through a longer, seamless portfolio of UAE print installations and
+                    branding solutions.</p>
             </div>
-            <div class="carousel" data-carousel>
-                <div class="carousel__track-wrap">
-                    <div class="carousel__track">
-                        <article class="carousel-card" data-carousel-item>
+            <div class="carousel swiper" id="featured-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <article class="carousel-card">
                             <img src="assets/images/Crystan%20trophy.webp"
                                 alt="UV printed acrylic trophy branding and promotional award in Dubai" loading="lazy"
                                 decoding="async">
@@ -97,7 +99,9 @@
                                 <p>High-resolution UV print on crystal trophies for premium event branding.</p>
                             </div>
                         </article>
-                        <article class="carousel-card" data-carousel-item>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="carousel-card">
                             <img src="assets/images/Store%20branding.webp"
                                 alt="Large format retail signage and storefront branding in UAE" loading="lazy"
                                 decoding="async">
@@ -106,7 +110,9 @@
                                 <p>Custom retail launch signage, window displays, and interior brand visuals.</p>
                             </div>
                         </article>
-                        <article class="carousel-card" data-carousel-item>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="carousel-card">
                             <img src="assets/images/Hoarding%20Signage.webp"
                                 alt="Outdoor hoarding and construction site signage for Dubai development"
                                 loading="lazy" decoding="async">
@@ -115,7 +121,9 @@
                                 <p>Durable outdoor signage and site boards for construction, retail, and events.</p>
                             </div>
                         </article>
-                        <article class="carousel-card" data-carousel-item>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="carousel-card">
                             <img src="assets/images/Fabric%20backdrop.webp"
                                 alt="Printed fabric backdrop for exhibition and event branding in Dubai" loading="lazy"
                                 decoding="async">
@@ -124,7 +132,9 @@
                                 <p>Soft signage and exhibition backdrops with premium textile printing.</p>
                             </div>
                         </article>
-                        <article class="carousel-card" data-carousel-item>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="carousel-card">
                             <img src="assets/images/Van%20Branding.webp"
                                 alt="Vehicle wrap and van branding for fleet marketing across UAE" loading="lazy"
                                 decoding="async">
@@ -133,25 +143,29 @@
                                 <p>Full vehicle branding and vinyl wraps for commercial fleet visibility.</p>
                             </div>
                         </article>
-                        <article class="carousel-card" data-carousel-item>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="carousel-card">
                             <img src="assets/images/Store%20branding.webp"
-                                alt="Retail signage and storefront branding example" loading="lazy"
-                                decoding="async">
+                                alt="Retail signage and storefront branding example" loading="lazy" decoding="async">
                             <div class="carousel-card-content">
                                 <h3>Retail Signage Case</h3>
                                 <p>Elegant retail branding installations with consistent visual messaging.</p>
                             </div>
                         </article>
-                        <article class="carousel-card" data-carousel-item>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="carousel-card">
                             <img src="assets/images/Outdoor%20display%20stand.webp"
-                                alt="Outdoor display stand for branded event signage" loading="lazy"
-                                decoding="async">
+                                alt="Outdoor display stand for branded event signage" loading="lazy" decoding="async">
                             <div class="carousel-card-content">
                                 <h3>Event Display Stand</h3>
                                 <p>Portable display stands that capture attention in outdoor and indoor spaces.</p>
                             </div>
                         </article>
-                        <article class="carousel-card" data-carousel-item>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="carousel-card">
                             <img src="assets/images/Building%20roof%20signage.webp"
                                 alt="Building roof signage and large format branding in Dubai" loading="lazy"
                                 decoding="async">
@@ -160,19 +174,21 @@
                                 <p>High-impact roof branding designed for visibility across busy roadways.</p>
                             </div>
                         </article>
-                        <article class="carousel-card" data-carousel-item>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="carousel-card">
                             <img src="assets/images/Fabric%20backdrop.webp"
-                                alt="Fabric exhibition backdrop design solution" loading="lazy"
-                                decoding="async">
+                                alt="Fabric exhibition backdrop design solution" loading="lazy" decoding="async">
                             <div class="carousel-card-content">
                                 <h3>Backdrop Installation</h3>
                                 <p>Exhibition backdrops that elevate corporate presentations and event spaces.</p>
                             </div>
                         </article>
-                        <article class="carousel-card" data-carousel-item>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="carousel-card">
                             <img src="assets/images/Van%20Branding.webp"
-                                alt="Corporate vehicle wrap and van branding project" loading="lazy"
-                                decoding="async">
+                                alt="Corporate vehicle wrap and van branding project" loading="lazy" decoding="async">
                             <div class="carousel-card-content">
                                 <h3>Fleet Branding</h3>
                                 <p>Vehicle wraps that turn company cars into moving brand ambassadors.</p>
@@ -180,6 +196,9 @@
                         </article>
                     </div>
                 </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
@@ -331,59 +350,283 @@
             <div class="container faq-wrap">
                 <h2 class="section-title" data-animate>FAQ</h2>
 
-
                 <section class="cd-faq js-cd-faq max-width-md margin-top-lg margin-bottom-lg" data-animate>
                     <ul class="cd-faq__categories">
                         <li><a class="cd-faq__category cd-faq__category-selected truncate"
-                                href="#home-basics">Basics</a></li>
-                        <li><a class="cd-faq__category truncate" href="#home-turnaround">Turnaround</a></li>
-                        <li><a class="cd-faq__category truncate" href="#home-bulk">Bulk Orders</a></li>
+                                href="#general-basics">General & Basics</a></li>
+                        <li><a class="cd-faq__category truncate" href="#turnaround-production">Turnaround &
+                                Production</a></li>
+                        <li><a class="cd-faq__category truncate" href="#uv-printing">UV Printing Services</a></li>
+                        <li><a class="cd-faq__category truncate" href="#large-format">Large Format Printing</a></li>
+                        <li><a class="cd-faq__category truncate" href="#signages-wayfinding">Signages & Wayfinding</a>
+                        </li>
+                        <li><a class="cd-faq__category truncate" href="#promotional-bulk">Promotional Products & Bulk
+                                Orders</a></li>
                     </ul>
 
                     <div class="cd-faq__items">
-                        <ul id="home-basics" class="cd-faq__group">
+                        <ul id="general-basics" class="cd-faq__group">
                             <li class="cd-faq__title">
-                                <h2>Basics</h2>
+                                <h2>General & Basics</h2>
                             </li>
                             <li class="cd-faq__item cd-faq__item--expanded">
-                                <a class="cd-faq__trigger" href="#0"><span>What printing services do you offer in
-                                        UAE?</span></a>
+                                <a class="cd-faq__trigger" href="#0"><span>What printing and advertising services do you
+                                        offer in the UAE?</span></a>
                                 <div class="cd-faq__content">
                                     <div class="text-component">
-                                        We provide UV printing services, large format printing, signages, and
-                                        promotional product branding with custom sizes and finishing options.
+                                        DesignPix Advertising is a premium creative production studio offering a
+                                        comprehensive range of services across the UAE. Our core specialties include
+                                        high-resolution UV printing, large format printing (such as billboards and
+                                        banners), custom indoor and outdoor signages, vehicle wraps, and branded
+                                        promotional products. We handle everything from retail storefront graphics to
+                                        exhibition booth setups.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="cd-faq__item">
+                                <a class="cd-faq__trigger" href="#0"><span>Where are your printing services available?
+                                        Do you deliver across the UAE?</span></a>
+                                <div class="cd-faq__content">
+                                    <div class="text-component">
+                                        Yes, we provide full UAE delivery coverage. Whether your business is located in
+                                        Dubai, Abu Dhabi, Sharjah, or any other emirate, we ensure your custom printing,
+                                        signage, and promotional products are delivered safely and on time. We also
+                                        offer installation support based on your project requirements.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="cd-faq__item">
+                                <a class="cd-faq__trigger" href="#0"><span>How do I request a quote for a custom
+                                        printing or signage project?</span></a>
+                                <div class="cd-faq__content">
+                                    <div class="text-component">
+                                        Requesting a quote is simple. You can use the "Request a Quote" or "Contact Us"
+                                        buttons on our website, email us at manu@designpixadv.ae, or reach out directly
+                                        via WhatsApp/phone at +971 58 582 4210. Provide us with your project scope,
+                                        volume, timelines, and final usage environment, and our team will provide a
+                                        quick and accurate quotation.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="cd-faq__item">
+                                <a class="cd-faq__trigger" href="#0"><span>Do you offer graphic design support or
+                                        artwork checking before printing?</span></a>
+                                <div class="cd-faq__content">
+                                    <div class="text-component">
+                                        Absolutely. As part of our standard workflow, we conduct a thorough artwork
+                                        check before production. We verify file setup, dimensions, color profiles
+                                        (CMYK), and material matching to ensure the final print meets our high-quality
+                                        standards and your brand guidelines.
                                     </div>
                                 </div>
                             </li>
                         </ul>
 
-                        <ul id="home-turnaround" class="cd-faq__group">
+                        <ul id="turnaround-production" class="cd-faq__group">
                             <li class="cd-faq__title">
-                                <h2>Turnaround</h2>
+                                <h2>Turnaround & Production</h2>
                             </li>
                             <li class="cd-faq__item">
                                 <a class="cd-faq__trigger" href="#0"><span>How fast can I get custom printing done in
                                         Dubai?</span></a>
                                 <div class="cd-faq__content">
                                     <div class="text-component">
-                                        Turnaround depends on volume and finishing requirements, but most standard jobs
-                                        are scheduled quickly after artwork approval.
+                                        Turnaround times depend on the volume, complexity, and finishing requirements of
+                                        your order. However, we pride ourselves on fast production cycles. Most standard
+                                        printing jobs are scheduled and completed quickly once the artwork is approved.
+                                        For urgent requirements, please contact our support team to discuss expedited
+                                        production options.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="cd-faq__item">
+                                <a class="cd-faq__trigger" href="#0"><span>What is your project delivery
+                                        workflow?</span></a>
+                                <div class="cd-faq__content">
+                                    <div class="text-component">
+                                        Our workflow is designed for efficiency and quality. It involves four key steps:
+                                        <ol
+                                            style="padding-left: 1.15rem; margin: 0.75rem 0 0; color: var(--brand-gray-700);">
+                                            <li><strong>Consultation:</strong> Defining scope, volume, and timelines.
+                                            </li>
+                                            <li><strong>Artwork Check:</strong> Verifying files for print readiness.
+                                            </li>
+                                            <li><strong>Production:</strong> Executing the print and finishing with
+                                                strict quality controls.</li>
+                                            <li><strong>Delivery:</strong> Handover or professional installation at your
+                                                site.</li>
+                                        </ol>
                                     </div>
                                 </div>
                             </li>
                         </ul>
 
-                        <ul id="home-bulk" class="cd-faq__group">
+                        <ul id="uv-printing" class="cd-faq__group">
                             <li class="cd-faq__title">
-                                <h2>Bulk Orders</h2>
+                                <h2>UV Printing Services</h2>
+                            </li>
+                            <li class="cd-faq__item">
+                                <a class="cd-faq__trigger" href="#0"><span>What materials can be used for UV printing in
+                                        the UAE?</span></a>
+                                <div class="cd-faq__content">
+                                    <div class="text-component">
+                                        Our advanced UV printing technology allows us to print directly onto a wide
+                                        variety of rigid and flexible substrates. Popular materials include acrylic,
+                                        glass, metal (aluminium, steel), wood, MDF, PVC, foam board, ACP (Aluminium
+                                        Composite Panel), and vinyl sticker media.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="cd-faq__item">
+                                <a class="cd-faq__trigger" href="#0"><span>Is UV printing suitable for outdoor signage
+                                        in Dubai's weather?</span></a>
+                                <div class="cd-faq__content">
+                                    <div class="text-component">
+                                        Yes, UV printing is highly durable and water-resistant, making it excellent for
+                                        outdoor use in the UAE. The UV curing process makes the ink resistant to fading
+                                        from sunlight. For extreme conditions or high-touch areas, we can apply
+                                        additional lamination or protective coatings to extend the lifespan of the
+                                        print.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="cd-faq__item">
+                                <a class="cd-faq__trigger" href="#0"><span>What is the difference between UV printing
+                                        and standard sticker mounting?</span></a>
+                                <div class="cd-faq__content">
+                                    <div class="text-component">
+                                        Direct UV printing applies ink directly onto the rigid surface (like acrylic or
+                                        metal), resulting in a cleaner, more premium finish without the risk of edges
+                                        peeling or lifting over time. Sticker mounting involves printing on vinyl and
+                                        applying it to a board, which is cost-effective but may not offer the same
+                                        high-end look as direct UV printing.
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <ul id="large-format" class="cd-faq__group">
+                            <li class="cd-faq__title">
+                                <h2>Large Format Printing</h2>
+                            </li>
+                            <li class="cd-faq__item">
+                                <a class="cd-faq__trigger" href="#0"><span>What types of large format printing do you
+                                        provide for events and exhibitions?</span></a>
+                                <div class="cd-faq__content">
+                                    <div class="text-component">
+                                        We offer complete large format solutions ideal for events, exhibitions, and
+                                        retail launches. This includes custom wallpaper prints, vinyl stickers,
+                                        high-contrast posters, fabric prints (soft signage), flags, stage backdrops, and
+                                        portable rollup and popup stand systems.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="cd-faq__item">
+                                <a class="cd-faq__trigger" href="#0"><span>Can large format prints withstand outdoor
+                                        conditions?</span></a>
+                                <div class="cd-faq__content">
+                                    <div class="text-component">
+                                        Yes. When we produce large format prints for outdoor use, such as construction
+                                        site hoardings or outdoor banners, we select weather-resistant media and apply
+                                        appropriate finishing techniques to ensure they withstand heat, sunlight, and
+                                        moisture.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="cd-faq__item">
+                                <a class="cd-faq__trigger" href="#0"><span>What file specifications are required for
+                                        large format printing?</span></a>
+                                <div class="cd-faq__content">
+                                    <div class="text-component">
+                                        For the best results at scale, we require high-resolution, print-ready files
+                                        (PDF, AI, EPS, or high-res PSD). Files should be in CMYK color mode, with fonts
+                                        outlined, and include the correct dimensions and bleed areas to ensure crisp,
+                                        accurate output.
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <ul id="signages-wayfinding" class="cd-faq__group">
+                            <li class="cd-faq__title">
+                                <h2>Signages & Wayfinding</h2>
+                            </li>
+                            <li class="cd-faq__item">
+                                <a class="cd-faq__trigger" href="#0"><span>What types of custom signages do you
+                                        manufacture?</span></a>
+                                <div class="cd-faq__content">
+                                    <div class="text-component">
+                                        We design, produce, and install a wide variety of signages, including indoor
+                                        reception and departmental signs, durable outdoor exterior signs, safety and
+                                        compliance signages, comprehensive wayfinding systems, illuminated sign boards,
+                                        and custom neon/LED-flex signs.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="cd-faq__item">
+                                <a class="cd-faq__trigger" href="#0"><span>Do you provide installation services for
+                                        signages in Dubai?</span></a>
+                                <div class="cd-faq__content">
+                                    <div class="text-component">
+                                        Yes, we offer professional installation support for all our signage projects.
+                                        Our team ensures that your indoor, outdoor, or wayfinding signages are securely
+                                        and correctly installed at your location, whether it's a retail store, corporate
+                                        office, or event venue.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="cd-faq__item">
+                                <a class="cd-faq__trigger" href="#0"><span>What is the best material for outdoor sign
+                                        boards in the UAE?</span></a>
+                                <div class="cd-faq__content">
+                                    <div class="text-component">
+                                        The best material depends on the specific location and viewing distance, but we
+                                        commonly recommend Aluminium Composite Panels (ACP), coated metals, and
+                                        high-grade acrylics for outdoor signages in the UAE. These materials offer
+                                        excellent resistance to heat and UV exposure, ensuring long-lasting brand
+                                        visibility.
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <ul id="promotional-bulk" class="cd-faq__group">
+                            <li class="cd-faq__title">
+                                <h2>Promotional Products & Bulk Orders</h2>
                             </li>
                             <li class="cd-faq__item">
                                 <a class="cd-faq__trigger" href="#0"><span>Do you support bulk branding orders for
-                                        events?</span></a>
+                                        corporate events?</span></a>
                                 <div class="cd-faq__content">
                                     <div class="text-component">
-                                        Yes. We handle bulk event branding including backdrops, rollups, flags,
-                                        stickers, and promotional items.
+                                        Yes, we specialize in handling bulk branding orders for corporate events,
+                                        product launches, and exhibitions. We can provide coordinated production across
+                                        all our services, delivering a complete package that includes backdrops,
+                                        rollups, promotional items, and staff uniforms.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="cd-faq__item">
+                                <a class="cd-faq__trigger" href="#0"><span>What types of promotional products can you
+                                        customize?</span></a>
+                                <div class="cd-faq__content">
+                                    <div class="text-component">
+                                        We offer a wide range of customizable promotional merchandise, including office
+                                        supplies, corporate uniforms and bags, trophies and medals, branded pens,
+                                        reusable water bottles, and corporate mugs. These items are perfect for
+                                        giveaways, employee kits, and client appreciation packs.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="cd-faq__item">
+                                <a class="cd-faq__trigger" href="#0"><span>Can you ensure the promotional products match
+                                        our brand colors?</span></a>
+                                <div class="cd-faq__content">
+                                    <div class="text-component">
+                                        Absolutely. Brand consistency is a priority for us. We utilize precise color
+                                        matching techniques and high-quality printing processes to ensure that your logo
+                                        and brand colors are accurately reproduced across all promotional items and
+                                        print materials.
                                     </div>
                                 </div>
                             </li>
@@ -454,10 +697,34 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What printing services do you offer in UAE?",
+          "name": "What printing and advertising services do you offer in the UAE?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "We provide UV printing services, large format printing, signages, and promotional product branding with custom sizes and finishing options."
+            "text": "DesignPix Advertising offers UV printing, large format printing, signages, promotional product branding, vehicle graphics, and full event branding solutions across the UAE."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where are your printing services available? Do you deliver across the UAE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we deliver across the UAE, including Dubai, Abu Dhabi, Sharjah, and other emirates. We also provide installation support for many signage and display projects."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I request a quote for a custom printing or signage project?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use the website contact form, email manu@designpixadv.ae, or message via WhatsApp at +971 58 582 4210 with your project details, and our team will provide an estimate promptly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer graphic design support or artwork checking before printing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we review artwork for print readiness, checking file setup, color profiles, dimensions, and bleed to ensure the final output is accurate and high quality."
           }
         },
         {
@@ -465,21 +732,118 @@
           "name": "How fast can I get custom printing done in Dubai?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Turnaround depends on volume and finishing requirements, but most standard jobs are scheduled quickly after artwork approval."
+            "text": "Turnaround times depend on the project size and finishing requirements, but we aim to complete most standard jobs quickly after artwork approval. Urgent requests can be prioritized when needed."
           }
         },
         {
           "@type": "Question",
-          "name": "Do you support bulk branding orders for events?",
+          "name": "What is your project delivery workflow?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. We handle bulk event branding including backdrops, rollups, flags, stickers, and promotional items."
+            "text": "Our workflow includes consultation, artwork validation, production with quality control, and delivery or installation to ensure a smooth experience from quote to handover."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What materials can be used for UV printing in the UAE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We can print on acrylic, glass, metal, wood, MDF, PVC, foam board, ACP, and vinyl substrates using UV printing for sharp colors and durable finishes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is UV printing suitable for outdoor signage in Dubai's weather?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, UV printing is water-resistant and fade-resistant, making it well-suited for outdoor signage. Additional lamination can be applied for extra protection in harsh conditions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between UV printing and standard sticker mounting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "UV printing applies ink directly to rigid surfaces for a premium, seamless finish, while sticker mounting uses printed vinyl applied onto a board, which is more economical but may not offer the same long-term durability."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What types of large format printing do you provide for events and exhibitions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We produce event and exhibition materials such as backdrops, posters, banners, fabric prints, flags, and rollup displays with high-resolution large format printing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can large format prints withstand outdoor conditions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we select weather-resistant media and finishing treatments for outdoor large format prints to ensure they remain durable and vibrant in outdoor settings."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What file specifications are required for large format printing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Files should be print-ready in CMYK mode with correct dimensions, bleed, and outlined fonts. Preferred formats include PDF, AI, EPS, or high-resolution PSD files."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What types of custom signages do you manufacture?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We manufacture indoor and outdoor signs, wayfinding systems, illuminated signboards, neon/LED-flex signage, and custom acrylic or metal displays tailored to your brand."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide installation services for signages in Dubai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, professional installation is available for most signage projects so that your displays are securely mounted and ready for use."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best material for outdoor sign boards in the UAE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ACP, coated metals, and high-grade acrylics are commonly recommended for outdoor sign boards in the UAE because they offer strong durability against heat and UV exposure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you support bulk branding orders for corporate events?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we handle bulk branding orders, delivering coordinated production for event branding with signage, promotional products, and display materials."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What types of promotional products can you customize?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We customize office supplies, uniforms, bags, trophies, pens, bottles, mugs, and other branded promotional items suitable for giveaways and corporate events."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you ensure the promotional products match our brand colors?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we use precise color matching and high-quality printing processes to ensure promotional products reflect your brand colors accurately."
           }
         }
       ]
     }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
 

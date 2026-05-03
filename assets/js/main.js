@@ -84,135 +84,58 @@
     node.textContent = new Date().getFullYear();
   });
 
-  const carouselContainers = document.querySelectorAll(".carousel");
-  carouselContainers.forEach((carousel) => {
-    const carouselTrack = carousel.querySelector(".carousel__track");
-    if (!carouselTrack) {
+  const initFeaturedSwiper = () => {
+    if (!window.Swiper) {
+      // If Swiper script isn't loaded yet, retry after a short delay
+      setTimeout(initFeaturedSwiper, 100);
       return;
     }
 
-    const carouselItems = Array.from(
-      carouselTrack.querySelectorAll("[data-carousel-item]"),
-    );
-    let slideshowTimer = null;
-    let resumeTimer = null;
-    let currentIndex = 0;
-
-    const updateActiveSlide = () => {
-      const trackCenter =
-        carouselTrack.scrollLeft + carouselTrack.clientWidth / 2;
-      let nearestIndex = 0;
-      let nearestDistance = Infinity;
-
-      carouselItems.forEach((item, index) => {
-        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
-        const distance = Math.abs(trackCenter - itemCenter);
-        if (distance < nearestDistance) {
-          nearestDistance = distance;
-          nearestIndex = index;
-        }
-      });
-
-      currentIndex = nearestIndex;
-      carouselItems.forEach((item, itemIndex) => {
-        item.classList.toggle("active", itemIndex === currentIndex);
-      });
-    };
-
-    const scrollToIndex = (index) => {
-      currentIndex = (index + carouselItems.length) % carouselItems.length;
-      const item = carouselItems[currentIndex];
-      if (!item) {
-        return;
-      }
-
-      const targetScroll = Math.max(
-        0,
-        item.offsetLeft - (carouselTrack.clientWidth - item.offsetWidth) / 2,
-      );
-
-      carouselTrack.scrollTo({ left: targetScroll, behavior: "smooth" });
-      if (gsap) {
-        gsap.to(item, {
-          opacity: 1,
-          scale: 1,
-          duration: 0.6,
-          ease: "power3.out",
-        });
-      }
-      updateActiveSlide();
-    };
-
-    const getCanScrollHorizontal = (deltaY) => {
-      if (deltaY > 0) {
-        return (
-          carouselTrack.scrollLeft + carouselTrack.clientWidth <
-          carouselTrack.scrollWidth - 1
-        );
-      }
-      return carouselTrack.scrollLeft > 1;
-    };
-
-    const startSlideshow = () => {
-      if (slideshowTimer) {
-        return;
-      }
-      slideshowTimer = window.setInterval(() => {
-        scrollToIndex(currentIndex + 1);
-      }, 5000);
-    };
-
-    const stopSlideshow = () => {
-      if (slideshowTimer) {
-        window.clearInterval(slideshowTimer);
-        slideshowTimer = null;
-      }
-      if (resumeTimer) {
-        window.clearTimeout(resumeTimer);
-        resumeTimer = null;
-      }
-    };
-
-    const resetSlideshow = () => {
-      stopSlideshow();
-      resumeTimer = window.setTimeout(startSlideshow, 7000);
-    };
-
-    carouselTrack.addEventListener(
-      "wheel",
-      (event) => {
-        if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
-          if (getCanScrollHorizontal(event.deltaY)) {
-            event.preventDefault();
-            carouselTrack.scrollBy({
-              left: event.deltaY * 2,
-              behavior: "smooth",
-            });
-            resetSlideshow();
-          }
-        }
+    const swiper = new Swiper("#featured-swiper", {
+      slidesPerView: 2.15,
+      spaceBetween: 24,
+      centeredSlides: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
       },
-      { passive: false },
-    );
-
-    carouselTrack.addEventListener("scroll", () => {
-      window.clearTimeout(resumeTimer);
-      resumeTimer = window.setTimeout(updateActiveSlide, 150);
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      loop: true,
+      breakpoints: {
+        900: {
+          slidesPerView: 1.3,
+          spaceBetween: 18,
+        },
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 16,
+        },
+      },
     });
 
     if (gsap) {
-      gsap.from(carousel.querySelectorAll(".carousel-card"), {
+      gsap.from("#featured-swiper .carousel-card", {
         opacity: 0,
-        y: 40,
-        stagger: 0.12,
-        duration: 0.85,
+        y: 30,
+        stagger: 0.1,
+        duration: 0.75,
         ease: "power3.out",
       });
     }
+  };
 
-    updateActiveSlide();
-    startSlideshow();
-  });
+  if (document.readyState !== "loading") {
+    setTimeout(initFeaturedSwiper, 100);
+  } else {
+    document.addEventListener("DOMContentLoaded", initFeaturedSwiper);
+  }
 
   const getScrollOffset = () => {
     const header = document.querySelector(".site-header");
