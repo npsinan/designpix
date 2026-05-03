@@ -1172,7 +1172,107 @@ textarea:focus {
 .site-footer {
     background: linear-gradient(180deg, rgba(16, 24, 40, 0.98), rgba(10, 14, 24, 1));
     color: #e4e8ef;
-    padding: 2.5rem 0 2rem;
+    padding: 4rem 0 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-column h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.footer-column ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.footer-column ul li a {
+    color: #d8deea;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.footer-column ul li a:hover {
+    color: #fff;
+}
+
+.footer-subscribe p {
+    color: #d8deea;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.subscribe-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.subscribe-form input {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.subscribe-form input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.subscribe-form button {
+    padding: 0.7rem 1.4rem;
+    background: #3b82f6;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+}
+
+.subscribe-form button:hover {
+    background: #2563eb;
+}
+
+.privacy-text {
+    color: #a1aac2;
+    font-size: 0.85rem;
+}
+
+.privacy-text a {
+    color: #3b82f6;
+    text-decoration: underline;
+}
+
+.privacy-text a:hover {
+    color: #60a5fa;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem;
+}
+
+.footer-bottom p {
+    color: #a1aac2;
+    font-size: 0.9rem;
 }
 
 .footer-inner {
@@ -1523,5 +1623,18 @@ gap: 0.55rem;
 
     .fixed-contact__toggle {
         padding: 0.68rem 0.9rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+    }
+
+    .subscribe-form {
+        flex-direction: column;
+    }
+
+    .subscribe-form button {
+        width: 100%;
     }
 }
