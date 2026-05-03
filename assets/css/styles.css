@@ -635,10 +635,19 @@ img {
     cursor: pointer;
     transition: transform 0.2s ease, background 0.2s ease;
     position: absolute;
-    top: auto;
-    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
     width: auto;
     height: auto;
+    z-index: 10;
+}
+
+.swiper-button-prev {
+    left: 1rem;
+}
+
+.swiper-button-next {
+    right: 1rem;
 }
 
 .swiper-button-prev::after,
