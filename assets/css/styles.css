@@ -513,7 +513,7 @@ img {
 .carousel .swiper-wrapper {
     display: flex;
     transition: transform 0.45s ease;
-    gap: 0;
+    gap: 0.5rem;
     align-items: stretch;
     padding: 0;
     margin: 0;
@@ -521,8 +521,8 @@ img {
 }
 
 .carousel .swiper-slide {
-    min-width: 100%;
-    flex: 0 0 100%;
+    min-width: calc((100% - 2rem) / 3);
+    flex: 0 0 calc((100% - 2rem) / 3);
     min-height: 420px;
     display: flex;
     align-items: center;
@@ -530,8 +530,8 @@ img {
 }
 
 .carousel .swiper-slide:not(.is-active) .carousel-card {
-    opacity: 0.95;
-    transform: scale(0.98);
+    opacity: 0.85;
+    transform: scale(0.96);
 }
 
 .carousel .swiper-slide.is-active .carousel-card {
@@ -1400,11 +1400,14 @@ textarea:focus {
     margin-top: 0.45rem;
 }
 
-
-bottom: 18px;
-z-index: 1800;
-display: grid;
-gap: 0.55rem;
+.fixed-contact {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 1800;
+    display: grid;
+    gap: 0.55rem;
+    width: max-content;
 }
 
 .fixed-contact__toggle {

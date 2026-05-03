@@ -127,28 +127,40 @@
       return;
     }
 
+    const visibleSlides = 3;
     let currentIndex = 0;
     const totalSlides = slides.length;
+    const pageCount = Math.max(totalSlides - visibleSlides + 1, 1);
+
+    const getStep = () => {
+      const slideStyle = window.getComputedStyle(slides[0]);
+      const gap = parseFloat(window.getComputedStyle(track).gap || "0");
+      return slides[0].getBoundingClientRect().width + gap;
+    };
 
     const createPagination = () => {
       pagination.innerHTML = "";
-      slides.forEach((_, index) => {
+      for (let page = 0; page < pageCount; page += 1) {
         const dot = document.createElement("button");
         dot.type = "button";
         dot.className = "carousel-dot";
-        dot.setAttribute("aria-label", `Go to slide ${index + 1}`);
+        dot.setAttribute("aria-label", `Go to slide ${page + 1}`);
         dot.addEventListener("click", () => {
-          updateSlider(index);
+          updateSlider(page);
         });
         pagination.appendChild(dot);
-      });
+      }
     };
 
     const updateSlider = (index) => {
-      currentIndex = (index + totalSlides) % totalSlides;
-      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      currentIndex = Math.min(Math.max(index, 0), pageCount - 1);
+      const step = getStep();
+      track.style.transform = `translateX(-${currentIndex * step}px)`;
       slides.forEach((slide, slideIndex) => {
-        slide.classList.toggle("is-active", slideIndex === currentIndex);
+        const isVisible =
+          slideIndex >= currentIndex &&
+          slideIndex < currentIndex + visibleSlides;
+        slide.classList.toggle("is-active", isVisible);
       });
       pagination.querySelectorAll(".carousel-dot").forEach((dot, dotIndex) => {
         dot.classList.toggle("is-active", dotIndex === currentIndex);
@@ -161,6 +173,10 @@
 
     nextButton.addEventListener("click", () => {
       updateSlider(currentIndex + 1);
+    });
+
+    window.addEventListener("resize", () => {
+      updateSlider(currentIndex);
     });
 
     createPagination();
