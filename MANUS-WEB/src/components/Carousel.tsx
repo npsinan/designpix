@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useRef } from "react"
+import { Swiper as SwiperClass } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation, Pagination, Autoplay } from "swiper/modules"
 
@@ -26,20 +27,24 @@ export function Carousel({
   autoplay = true,
   effect = "slide",
 }: CarouselProps) {
+  const swiperRef = useRef<SwiperClass | null>(null)
+
   return (
-    <div className="carousel-container">
+    <div className="carousel-wrapper">
       <Swiper
+        ref={swiperRef}
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}
         slidesPerView={1}
         navigation={{
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
+          nextEl: ".carousel-next",
+          prevEl: ".carousel-prev",
+          disabledClass: "carousel-disabled",
         }}
         pagination={{
-          el: ".swiper-pagination",
+          el: ".carousel-dots",
           clickable: true,
-          bulletActiveClass: "swiper-pagination-bullet-active",
+          bulletActiveClass: "active",
         }}
         autoplay={
           autoplay
@@ -49,7 +54,7 @@ export function Carousel({
               }
             : false
         }
-        effect={effect}
+        loop={true}
         className="carousel-swiper"
       >
         {slides.map((slide) => (
@@ -69,11 +74,23 @@ export function Carousel({
       </Swiper>
 
       {/* Navigation buttons */}
-      <div className="swiper-button-prev carousel-nav-btn"></div>
-      <div className="swiper-button-next carousel-nav-btn"></div>
+      <button
+        className="carousel-button carousel-prev"
+        onClick={() => swiperRef.current?.slidePrev()}
+        aria-label="Previous slide"
+      >
+        ‹
+      </button>
+      <button
+        className="carousel-button carousel-next"
+        onClick={() => swiperRef.current?.slideNext()}
+        aria-label="Next slide"
+      >
+        ›
+      </button>
 
       {/* Pagination dots */}
-      <div className="swiper-pagination carousel-pagination"></div>
+      <div className="carousel-dots"></div>
     </div>
   )
 }
