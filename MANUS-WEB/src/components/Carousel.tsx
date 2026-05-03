@@ -1,12 +1,12 @@
 import React from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules"
+import { Navigation, Pagination, Autoplay } from "swiper/modules"
 
 // Import Swiper styles
 import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
-import "swiper/css/effect-fade"
+import "./carousel-styles.css"
 
 interface CarouselSlide {
   id: number
@@ -27,13 +27,20 @@ export function Carousel({
   effect = "slide",
 }: CarouselProps) {
   return (
-    <div className="w-full">
+    <div className="carousel-container">
       <Swiper
-        modules={[Navigation, Pagination, Autoplay, EffectFade]}
-        spaceBetween={30}
+        modules={[Navigation, Pagination, Autoplay]}
+        spaceBetween={0}
         slidesPerView={1}
-        navigation
-        pagination={{ clickable: true }}
+        navigation={{
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        }}
+        pagination={{
+          el: ".swiper-pagination",
+          clickable: true,
+          bulletActiveClass: "swiper-pagination-bullet-active",
+        }}
         autoplay={
           autoplay
             ? {
@@ -43,25 +50,30 @@ export function Carousel({
             : false
         }
         effect={effect}
-        className="overflow-hidden rounded-lg shadow-lg"
+        className="carousel-swiper"
       >
         {slides.map((slide) => (
-          <SwiperSlide key={slide.id}>
-            <div className="relative h-96 w-full">
-              <img
-                src={slide.image}
-                alt={slide.title}
-                className="h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              <div className="absolute right-0 bottom-0 left-0 p-6 text-white">
-                <h3 className="text-2xl font-bold">{slide.title}</h3>
-                <p className="mt-2 text-sm">{slide.description}</p>
-              </div>
+          <SwiperSlide key={slide.id} className="carousel-slide">
+            <img
+              src={slide.image}
+              alt={slide.title}
+              className="carousel-image"
+            />
+            <div className="carousel-overlay" />
+            <div className="carousel-content">
+              <h3 className="carousel-title">{slide.title}</h3>
+              <p className="carousel-description">{slide.description}</p>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
+
+      {/* Navigation buttons */}
+      <div className="swiper-button-prev carousel-nav-btn"></div>
+      <div className="swiper-button-next carousel-nav-btn"></div>
+
+      {/* Pagination dots */}
+      <div className="swiper-pagination carousel-pagination"></div>
     </div>
   )
 }
