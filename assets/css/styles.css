@@ -505,23 +505,54 @@ img {
 .carousel .swiper {
     width: 100%;
     min-height: 420px;
+    overflow: hidden;
 }
 
 .carousel .swiper-wrapper {
     display: flex;
+    transition: transform 0.45s ease;
     gap: 1rem;
     align-items: stretch;
     padding: 0;
     margin: 0;
+    width: 100%;
 }
 
 .carousel .swiper-slide {
-    min-width: min(420px, 100%);
-    flex: 0 0 min(420px, 100%);
+    min-width: 100%;
+    flex: 0 0 100%;
     min-height: 420px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.carousel .swiper-slide:not(.is-active) .carousel-card {
+    opacity: 0.95;
+    transform: scale(0.98);
+}
+
+.carousel .swiper-slide.is-active .carousel-card {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid rgba(45, 49, 56, 0.15);
+    background: rgba(45, 49, 56, 0.18);
+    margin: 0 6px;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.carousel-dot.is-active,
+.carousel-dot:hover {
+    background: var(--brand-red);
+    transform: scale(1.15);
 }
 
 .carousel-card {
@@ -613,14 +644,17 @@ img {
 
 .swiper-wrapper {
     display: flex;
+    transition: transform 0.45s ease;
     gap: 1rem;
+    align-items: stretch;
     padding: 0;
     margin: 0;
+    width: 100%;
 }
 
 .swiper-slide {
-    min-width: min(420px, 100%);
-    flex: 0 0 min(420px, 100%);
+    min-width: 100%;
+    flex: 0 0 100%;
 }
 
 .swiper-button-prev,
