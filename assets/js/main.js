@@ -127,18 +127,31 @@
       return;
     }
 
-    const visibleSlides = 3;
+    const getVisibleSlides = () => {
+      if (window.matchMedia("(max-width: 760px)").matches) {
+        return 1;
+      }
+      if (window.matchMedia("(max-width: 1080px)").matches) {
+        return 2;
+      }
+      return 3;
+    };
+
     let currentIndex = 0;
     const totalSlides = slides.length;
-    const pageCount = Math.max(totalSlides - visibleSlides + 1, 1);
 
-    const getStep = () => {
-      const slideStyle = window.getComputedStyle(slides[0]);
-      const gap = parseFloat(window.getComputedStyle(track).gap || "0");
-      return slides[0].getBoundingClientRect().width + gap;
+    const getPageCount = () => {
+      const visibleSlides = getVisibleSlides();
+      return Math.max(totalSlides - visibleSlides + 1, 1);
+    };
+
+    const getSlideOffset = (index) => {
+      const slide = slides[index];
+      return slide ? slide.offsetLeft : 0;
     };
 
     const createPagination = () => {
+      const pageCount = getPageCount();
       pagination.innerHTML = "";
       for (let page = 0; page < pageCount; page += 1) {
         const dot = document.createElement("button");
@@ -153,9 +166,11 @@
     };
 
     const updateSlider = (index) => {
+      const visibleSlides = getVisibleSlides();
+      const pageCount = getPageCount();
       currentIndex = Math.min(Math.max(index, 0), pageCount - 1);
-      const step = getStep();
-      track.style.transform = `translateX(-${currentIndex * step}px)`;
+      const offset = getSlideOffset(currentIndex);
+      track.style.transform = `translateX(-${offset}px)`;
       slides.forEach((slide, slideIndex) => {
         const isVisible =
           slideIndex >= currentIndex &&
@@ -165,6 +180,14 @@
       pagination.querySelectorAll(".carousel-dot").forEach((dot, dotIndex) => {
         dot.classList.toggle("is-active", dotIndex === currentIndex);
       });
+      if (pagination.querySelectorAll(".carousel-dot").length !== pageCount) {
+        createPagination();
+        pagination
+          .querySelectorAll(".carousel-dot")
+          .forEach((dot, dotIndex) => {
+            dot.classList.toggle("is-active", dotIndex === currentIndex);
+          });
+      }
     };
 
     prevButton.addEventListener("click", () => {
