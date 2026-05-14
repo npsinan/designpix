@@ -111,6 +111,39 @@
     node.textContent = new Date().getFullYear();
   });
 
+  const initHeroSlideshow = () => {
+    const slideshow = document.querySelector("[data-hero-slideshow]");
+    if (!slideshow) {
+      return;
+    }
+
+    const slides = Array.from(slideshow.querySelectorAll(".hero-slide"));
+    if (slides.length <= 1) {
+      return;
+    }
+
+    let activeIndex = slides.findIndex((slide) =>
+      slide.classList.contains("is-active"),
+    );
+    if (activeIndex < 0) {
+      activeIndex = 0;
+    }
+
+    const showSlide = (nextIndex) => {
+      activeIndex = (nextIndex + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => {
+        const isActive = slideIndex === activeIndex;
+        slide.classList.toggle("is-active", isActive);
+        slide.setAttribute("aria-hidden", String(!isActive));
+      });
+    };
+
+    showSlide(activeIndex);
+    window.setInterval(() => {
+      showSlide(activeIndex + 1);
+    }, 3000);
+  };
+
   const initFeaturedSlider = () => {
     const featuredEl = document.querySelector("#featured-swiper");
     if (!featuredEl) {
@@ -207,9 +240,15 @@
   };
 
   if (document.readyState !== "loading") {
-    setTimeout(initFeaturedSlider, 100);
+    setTimeout(() => {
+      initHeroSlideshow();
+      initFeaturedSlider();
+    }, 100);
   } else {
-    document.addEventListener("DOMContentLoaded", initFeaturedSlider);
+    document.addEventListener("DOMContentLoaded", () => {
+      initHeroSlideshow();
+      initFeaturedSlider();
+    });
   }
 
   const getScrollOffset = () => {
