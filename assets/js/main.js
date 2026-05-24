@@ -87,11 +87,35 @@
     });
   }
 
-  const currentPage = window.location.pathname.split("/").pop() || "index.html";
+  if (
+    window.location.protocol !== "file:" &&
+    window.location.pathname.endsWith(".html")
+  ) {
+    const cleanPath = window.location.pathname
+      .replace(/\/index\.html$/, "/")
+      .replace(/\.html$/, "/");
+    window.history.replaceState(
+      null,
+      "",
+      `${cleanPath}${window.location.search}${window.location.hash}`,
+    );
+  }
+
+  const normalizePagePath = (value) => {
+    const path = (value || "")
+      .split("#")[0]
+      .split("?")[0]
+      .replace(/^https?:\/\/[^/]+/, "")
+      .replace(/^\.\//, "");
+    const page = path.split("/").filter(Boolean).pop() || "index";
+    return page.replace(/\.html$/, "") || "index";
+  };
+
+  const currentPage = normalizePagePath(window.location.pathname);
   document
     .querySelectorAll(".primary-nav > a, .nav-services__panel a")
     .forEach((link) => {
-      if (link.getAttribute("href") === currentPage) {
+      if (normalizePagePath(link.getAttribute("href")) === currentPage) {
         link.classList.add("is-active");
       }
     });
@@ -408,7 +432,25 @@
     });
   });
 
-  const contactFab = document.querySelector("[data-contact-fab]");
+  let contactFab = document.querySelector("[data-contact-fab]");
+  if (!contactFab) {
+    contactFab = document.createElement("div");
+    contactFab.className = "fixed-contact";
+    contactFab.dataset.contactFab = "";
+    contactFab.innerHTML = `
+      <div class="fixed-contact__menu">
+        <a class="fixed-contact__menu-link fixed-contact__menu-link--whatsapp" href="https://wa.me/971585824210?text=Hello%20Design%20Pix%2C%20I%20need%20printing%20support." target="_blank" rel="noopener noreferrer"><i class="ri-whatsapp-fill" aria-hidden="true"></i><span>WhatsApp Chat</span></a>
+        <a href="/contact-us/">Open Contact Form</a>
+        <a href="tel:+971585824210">Call Now</a>
+      </div>
+      <button class="fixed-contact__toggle" type="button" data-contact-toggle aria-expanded="false" aria-label="Open WhatsApp contact options">
+        <i class="ri-whatsapp-fill" aria-hidden="true"></i>
+        <span>WhatsApp</span>
+      </button>
+    `;
+    document.body.append(contactFab);
+  }
+
   if (contactFab) {
     const fabToggle = contactFab.querySelector("[data-contact-toggle]");
 
