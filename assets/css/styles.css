@@ -447,8 +447,16 @@ img {
 .faq-grid {
     margin-top: 1.55rem;
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 1.25rem;
+}
+
+/* Override for specific layouts that need controlled column spans */
+.card-grid,
+.process-grid,
+.showcase-grid,
+.related-grid {
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: 1rem;
 }
 
 .contact-grid {
@@ -819,8 +827,8 @@ img {
 .stat-grid {
     margin-top: 1.4rem;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 1.25rem;
 }
 
 .stat-card {
@@ -833,7 +841,7 @@ img {
 
 .stat-card strong {
     display: block;
-    color: var(--brand-red);
+    color: var(--brand-accent);
     font-size: 1.45rem;
     line-height: 1;
 }
@@ -1480,9 +1488,6 @@ textarea:focus {
         grid-column: span 6;
     }
 
-    .stat-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
 }
 
 @media (max-width: 920px) {
@@ -1681,10 +1686,6 @@ textarea:focus {
     .footer-content {
         grid-template-columns: 1fr;
         gap: 1.8rem;
-    }
-
-    .stat-grid {
-        grid-template-columns: 1fr;
     }
 
     .subscribe-form {
